@@ -7,49 +7,77 @@ export function Letter() {
       <div className="grain absolute inset-0 opacity-30" />
 
       <div className="relative mx-auto max-w-2xl">
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 1 }}
-          className="relative rounded-[28px] bg-background/90 px-6 py-10 shadow-soft sm:px-12 sm:py-14"
-        >
+        {/* LETTER CARD — intentionally NOT hidden by whileInView */}
+        <div className="relative rounded-[28px] bg-background/90 px-6 py-10 shadow-soft sm:px-12 sm:py-14">
+
           {/* tiny label */}
-          <p className="mb-8 text-center font-sans text-[9px] tracking-[0.4em] uppercase text-muted-foreground">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8 text-center font-sans text-[9px] tracking-[0.4em] uppercase text-muted-foreground"
+          >
             A letter I probably should have written sooner
-          </p>
+          </motion.p>
 
           {/* heading */}
-          <h2 className="font-serif text-3xl italic leading-tight text-foreground sm:text-5xl">
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.6 }}
+            className="font-serif text-3xl italic leading-tight text-foreground sm:text-5xl"
+          >
             {content.letter.heading}
-          </h2>
+          </motion.h2>
 
           {/* letter body */}
           <div className="mt-8 space-y-6">
             {content.letter.body.map((paragraph, i) => (
-  <p
-    key={i}
-    className={`font-serif text-[17px] leading-[1.9] text-foreground/85 sm:text-lg ${
-      i === 0 ? "text-xl italic text-foreground" : ""
-    }`}
-  >
-    {paragraph}
-  </p>
-))}
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.05 }}
+                transition={{
+                  duration: 0.55,
+                  delay: Math.min(i * 0.08, 0.5),
+                }}
+                className={`font-serif text-[17px] leading-[1.9] text-foreground/85 sm:text-lg ${
+                  i === 0 ? "text-xl italic text-foreground" : ""
+                }`}
+              >
+                {paragraph}
+              </motion.p>
+            ))}
           </div>
 
           {/* signoff */}
-          <div className="mt-10 border-t border-border pt-8">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.6 }}
+            className="mt-10 border-t border-border pt-8"
+          >
             <p className="whitespace-pre-line font-serif text-lg italic leading-relaxed text-foreground">
               {content.letter.signoff}
             </p>
-          </div>
+          </motion.div>
 
-          {/* little K × K detail */}
-          <p className="mt-10 text-center font-sans text-[8px] tracking-[0.4em] uppercase text-muted-foreground/50">
+          {/* K × K */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-10 text-center font-sans text-[8px] tracking-[0.4em] uppercase text-muted-foreground/50"
+          >
             K × K
-          </p>
-        </motion.div>
+          </motion.p>
+
+        </div>
       </div>
     </section>
   );
